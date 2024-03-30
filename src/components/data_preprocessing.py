@@ -68,10 +68,12 @@ class data_preprocessing():
     def initiate_data_preprocessing(self):
         df = pd.read_csv('notebook\data\Telco-customer-churn.csv')
         df.drop(columns=['CustomerID','Count','Country','State','City','Zip Code','Lat Long','Latitude','Longitude','ChurnValue','ChurnReason','CLTV','ChurnScore'], inplace=True, axis=1)
+        df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
+        df['TotalCharges'].fillna(0, inplace=True)
         X,y = data_loader().fit(df,'ChurnLabel')    
         new_df= feature_select().fit(X , y)
         train_set, test_set = self.split_data.split(new_df)
-        return train_set, test_set
+        return print(train_set, test_set)
     
     def run(self):
         try:
