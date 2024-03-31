@@ -88,9 +88,6 @@ class DataTransformation():
             train_arr = np.c_[input_feature_training_arr, np.array(target_feature_train_df_new)]
             test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df_new)]
 
-            #train_arr = np.concatenate([input_feature_training_arr, np.array(target_feature_train_df)], axis=1)
-            #test_arr = np.concatenate([input_feature_test_arr, np.array(target_feature_test_df)], axis=1)
-
             logging.info(f"Saved preprocessing object.")
 
             save_object(
@@ -106,7 +103,7 @@ class DataTransformation():
         except Exception as e:
             raise CustomException(e, sys)
         
-
+'''
 if __name__ == '__main__':
     train_path = 'artifacts/train.csv'
     test_path = 'artifacts/test.csv'
@@ -114,3 +111,4 @@ if __name__ == '__main__':
     obj = DataTransformation()
     train_arr,test_arr,_ = obj.initiate_data_transformation(train_path,test_path)
     print(train_arr)
+'''

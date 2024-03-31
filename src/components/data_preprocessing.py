@@ -58,6 +58,8 @@ class split_data():
         train_set, test_set = train_test_split(df, test_size=0.2, random_state=43)
         return train_set, test_set
 
+
+'''
 #run test
 class data_preprocessing():
     def __init__(self):
@@ -84,3 +86,4 @@ class data_preprocessing():
 if __name__=='__main__':
     obj = data_preprocessing()
     obj.run()
+'''
