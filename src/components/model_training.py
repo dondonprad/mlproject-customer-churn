@@ -16,7 +16,7 @@ from src.utils import save_object, evaluate_models
 
 @dataclass
 class ModuleTrainerConfig:
-    trained_model_file_path = os.path.join("artifact","model.pkl")
+    trained_model_file_path = os.path.join("artifacts","model.pkl")
 
 class ModelTrainer:
     def __init__(self):
@@ -33,13 +33,11 @@ class ModelTrainer:
             )
             
             models= {
-                    "Logistic Regression" : LogisticRegression(solver='liblinear'),
                     "AdaBoost" : AdaBoostClassifier(),
                     "Gradient Boosting" : GradientBoostingClassifier()
             } 
             
             params = {
-                'Logistic Regression' : {'solver': ['lbfgs', 'liblinear']},
                 'AdaBoost' : {'learning_rate':[.1,.01,.001], 'n_estimators': [8,16,32]},
                 'Gradient Boosting' : {'learning_rate':[.1,.01,.001], 'n_estimators': [8,16,32]}
             }
