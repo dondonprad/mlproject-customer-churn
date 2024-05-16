@@ -1,0 +1,18 @@
+SeniorCitizen: Yes, No
+Partner: Yes, No
+Dependents : Yes, No
+MultipleLines: Yes, No, No Phone Service
+InternetService: DSL, Fiber Optic, No 
+OnlineSecurity: Yes, No, No Internet Service
+OnlineBackup: Yes, No, No Internet Service
+DeviceProtection: Yes, No, No Internet Service
+TechSupport: Yes, No, No Internet Service
+StreamingTV: Yes, No, No Internet Service
+StreamingMovies: Yes, No, No Internet Service
+Contract: Month-to-Month, One year, Two Year
+PaperlessBilling: Yes, No
+PaymentMethod: Mailed Check, Electronic Check, Bank Transfer (Automatic), Credit Card (Automatic)
+TenureMonths,
+MonthlyCharges,
+TotalCharges,
+ChurnLabel
