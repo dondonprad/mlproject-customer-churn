@@ -33,11 +33,10 @@ class DataTransformation():
             num_col = ['TotalCharges', 'MonthlyCharges']
 
             num_pipeline = Pipeline(steps=[('imputer', SimpleImputer(strategy='median')),
-                                           ('scaler', StandardScaler())])
+                                           ('scaler', MinMaxScaler())])
             
             cat_pipeline = Pipeline(steps=[('imputer', SimpleImputer(strategy='most_frequent')),
-                                           ('one_hot_encoding', OneHotEncoder()),
-                                           ('scaler', StandardScaler(with_mean=False))])
+                                           ('one_hot_encoding', OneHotEncoder())])
 
             logging.info(f'categorical columns: {cat_col}')
             logging.info(f'numerical columns: {num_col}')
@@ -82,7 +81,8 @@ class DataTransformation():
 
             logging.info('Applying preprocessing objet on traning and testing dataframe')
 
-            input_feature_training_arr = preprocessing_obj.fit_transform(input_feature_train_df).toarray()
+            preprocessing_obj.fit(input_feature_train_df) #.toarray()
+            input_feature_training_arr = preprocessing_obj.transform(input_feature_train_df).toarray()
             input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df).toarray()
 
             train_arr = np.c_[input_feature_training_arr, np.array(target_feature_train_df_new)]
@@ -99,16 +99,16 @@ class DataTransformation():
                 train_arr,
                 test_arr,
                 self.data_transformation_config.preprocessor_obj_file_path
-            )
+            ) 
         except Exception as e:
             raise CustomException(e, sys)
         
-'''
+''''
 if __name__ == '__main__':
     train_path = 'artifacts/train.csv'
     test_path = 'artifacts/test.csv'
 
     obj = DataTransformation()
     train_arr,test_arr,_ = obj.initiate_data_transformation(train_path,test_path)
-    print(train_arr)
+    print(train_arr[:5])
 '''
