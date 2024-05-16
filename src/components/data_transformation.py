@@ -28,12 +28,12 @@ class DataTransformation():
         try:
             cat_col = ['SeniorCitizen', 'Partner', 'Dependents', 'MultipleLines', 'InternetService',
                       'OnlineSecurity','OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV',
-                      'StreamingMovies', 'Contract', 'PaperlessBilling', 'PaymentMethod', 'TenureMonths']
+                      'StreamingMovies', 'Contract', 'PaperlessBilling', 'PaymentMethod']
             
-            num_col = ['TotalCharges', 'MonthlyCharges']
+            num_col = ['TenureMonths','TotalCharges','MonthlyCharges']
 
             num_pipeline = Pipeline(steps=[('imputer', SimpleImputer(strategy='median')),
-                                           ('scaler', MinMaxScaler())])
+                                           ('scaler', StandardScaler())])
             
             cat_pipeline = Pipeline(steps=[('imputer', SimpleImputer(strategy='most_frequent')),
                                            ('one_hot_encoding', OneHotEncoder())])
@@ -43,8 +43,8 @@ class DataTransformation():
             
 
             preprocessor = ColumnTransformer([
-                ('num_pipeline', num_pipeline, num_col),
-                ('cat_pipeline', cat_pipeline, cat_col)
+                ('cat_pipeline', cat_pipeline, cat_col),
+                ('num_pipeline', num_pipeline, num_col)
             ])
 
             logging.info("Numerical Columns standard scaling completed")
@@ -82,8 +82,8 @@ class DataTransformation():
             logging.info('Applying preprocessing objet on traning and testing dataframe')
 
             preprocessing_obj.fit(input_feature_train_df) #.toarray()
-            input_feature_training_arr = preprocessing_obj.transform(input_feature_train_df).toarray()
-            input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df).toarray()
+            input_feature_training_arr = preprocessing_obj.transform(input_feature_train_df)#.toarray()
+            input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)#.toarray()
 
             train_arr = np.c_[input_feature_training_arr, np.array(target_feature_train_df_new)]
             test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df_new)]
@@ -103,7 +103,7 @@ class DataTransformation():
         except Exception as e:
             raise CustomException(e, sys)
         
-''''
+
 if __name__ == '__main__':
     train_path = 'artifacts/train.csv'
     test_path = 'artifacts/test.csv'
@@ -111,4 +111,3 @@ if __name__ == '__main__':
     obj = DataTransformation()
     train_arr,test_arr,_ = obj.initiate_data_transformation(train_path,test_path)
     print(train_arr[:5])
-'''

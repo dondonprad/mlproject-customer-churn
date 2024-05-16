@@ -121,14 +121,6 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label class="form-label">Contract</label>
-                <select class="form-control" name="Contract" placeholder="Contract" required>
-                    <option value="Month-to-Month">Month-to-Month</option>
-                    <option value="One Year">One Year</option>
-                    <option value="Two Year">Two Year</option>
-                </select>
-            </div>
-            <div class="mb-3">
                 <label class="form-label">PaymentMethod</label>
                 <select class="form-control" name="PaymentMethod" placeholder="PaymentMethod" required>
                     <option value="Mailed Check">Mailed Check</option>
@@ -147,7 +139,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">TotalCharges</label>
-                <input class="form-control" type="number" name="TotalCharges" value=" " placeholder="TotalCharges"/>
+                <input class="form-control" type="number" name="TotalCharges" id="TotalCharges" placeholder="TotalCharges"/>
             </div>
             <div class="mb-3">
                 <input class="btn btn-primary" type="submit" value="Predict Churn" required />
