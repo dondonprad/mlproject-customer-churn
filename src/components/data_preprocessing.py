@@ -11,13 +11,14 @@ from src.logger import logging
 from src.exception import CustomException
 
 
-# the data loader class is class for split data frame into X(feature) and y(target)
+# data loader class is class for split data frame into X(feature) and y(target)
 class data_loader():
     def fit(self, df, target):
         X = df.drop(columns=target)
         y = df[target]
         return X, y
 
+# feature select class is class for feature elemination based on Kbest select 
 class feature_select():
     def num_cat (self, X, y):
         encoders_feature = {}
@@ -57,33 +58,3 @@ class split_data():
     def split(self, df):
         train_set, test_set = train_test_split(df, test_size=0.2, random_state=43)
         return train_set, test_set
-
-
-'''
-#run test
-class data_preprocessing():
-    def __init__(self):
-        self.feature_select = feature_select()
-        self.data_loader = data_loader()
-        self.split_data = split_data()
-    
-    def initiate_data_preprocessing(self):
-        df = pd.read_csv('notebook\data\Telco-customer-churn.csv')
-        df.drop(columns=['CustomerID','Count','Country','State','City','Zip Code','Lat Long','Latitude','Longitude','ChurnValue','ChurnReason','CLTV','ChurnScore'], inplace=True, axis=1)
-        df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
-        df['TotalCharges'].fillna(0, inplace=True)
-        X,y = data_loader().fit(df,'ChurnLabel')    
-        new_df= feature_select().fit(X , y)
-        train_set, test_set = self.split_data.split(new_df)
-        return print(train_set, test_set)
-    
-    def run(self):
-        try:
-            train_set, test_set = self.initiate_data_preprocessing()
-        except Exception as e:
-            raise CustomException(e, sys)
-
-if __name__=='__main__':
-    obj = data_preprocessing()
-    obj.run()
-'''

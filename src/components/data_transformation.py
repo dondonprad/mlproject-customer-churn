@@ -15,7 +15,7 @@ from src.utils import save_object
 
 @dataclass
 class DataTransformationConfig():
-    preprocessor_obj_file_path = os.path.join('artifacts','preprocessor.pkl')
+    preprocessor_obj_file_path:str = os.path.join('artifacts','preprocessor.pkl')
 
 class DataTransformation():
     def __init__(self):
@@ -33,7 +33,7 @@ class DataTransformation():
             num_col = ['TenureMonths','TotalCharges','MonthlyCharges']
 
             num_pipeline = Pipeline(steps=[('imputer', SimpleImputer(strategy='median')),
-                                           ('scaler', StandardScaler())])
+                                           ('scaler', MinMaxScaler())])
             
             cat_pipeline = Pipeline(steps=[('imputer', SimpleImputer(strategy='most_frequent')),
                                            ('one_hot_encoding', OneHotEncoder())])
@@ -81,9 +81,9 @@ class DataTransformation():
 
             logging.info('Applying preprocessing objet on traning and testing dataframe')
 
-            preprocessing_obj.fit(input_feature_train_df) #.toarray()
-            input_feature_training_arr = preprocessing_obj.transform(input_feature_train_df)#.toarray()
-            input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)#.toarray()
+            preprocessing_obj.fit(input_feature_train_df) 
+            input_feature_training_arr = preprocessing_obj.transform(input_feature_train_df)
+            input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)
 
             train_arr = np.c_[input_feature_training_arr, np.array(target_feature_train_df_new)]
             test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df_new)]
@@ -110,4 +110,5 @@ if __name__ == '__main__':
 
     obj = DataTransformation()
     train_arr,test_arr,_ = obj.initiate_data_transformation(train_path,test_path)
-    print(train_arr[:5])
+    print(train_arr[:1,:-1])
+    

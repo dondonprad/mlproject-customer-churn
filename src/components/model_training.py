@@ -65,7 +65,7 @@ class ModelTrainer:
 
             predicted=best_model.predict(X_test)
 
-            acc_score = accuracy_score(y_test, predicted)
+            acc_score = round(accuracy_score(y_test, predicted),2)
             return best_model_name, acc_score
 
         except Exception as e:

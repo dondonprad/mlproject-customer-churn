@@ -12,4 +12,5 @@ dataclasses
 flask
 scikit-optimize
 imbalanced-learn
+pyspark
 #-e .

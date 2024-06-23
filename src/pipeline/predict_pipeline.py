@@ -85,5 +85,30 @@ class CustomData:
         
         except Exception as e:
             raise CustomException(e, sys)
+        
+data = CustomData(
+            SeniorCitizen='No',
+            Partner='No',
+            Dependents='yes',
+            MultipleLines='No',
+            InternetService='DSL',
+            OnlineSecurity='yes',
+            OnlineBackup='Yes',
+            DeviceProtection='No',
+            TechSupport='No',
+            StreamingTV='No',
+            StreamingMovies='No',
+            Contract='Month-to-month',
+            PaperlessBilling='No',
+            PaymentMethod='Credit card (automatic)',
+            TenureMonths=int(2),
+            MonthlyCharges=float(2),
+            TotalCharges=float(4)
+        )
 
+pred_df = data.get_data_as_data_frame()
+print(pred_df)
+predict_pipeline = PredictPipeline()
+result = predict_pipeline.predict(pred_df)
+print(result)
     
